@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "8b971f20-056a-4327-8af1-6cffcdd75a65",
+		"name": "04_TestCase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38487129"
+	},
+	"item": [
+		{
+			"name": "SSA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const cheerio = require('cheerio');\r",
+							"const htmlBody = pm.response.text();\r",
+							"const $ = cheerio.load(htmlBody);\r",
+							"\r",
+							"pm.test(\"Validate status code is 200\", function() \r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Store number\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(\"9997\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate VOIDS\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"VOIDS\"));\r",
+							"});\r",
+							"pm.test(\"Validate REFUNDS\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"REFUNDS\"));\r",
+							"});\r",
+							"pm.test(\"Validate TAX REFUND\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"TAXES-REFUNDED\"));\r",
+							"});\r",
+							"pm.test(\"Validate TAX TOTAL\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"TAXES-TOTAL\"));\r",
+							"});\r",
+							"pm.test(\"Validate MNF COUPON\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"MNF-COUPONS\"));\r",
+							"});\r",
+							"pm.test(\"Validate STR COUPON\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"STR-COUPONS\"));\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"startDate\": \"{{startDate}}\",\r\n    \"store\": \"9997\",\r\n\t\"endDate\": \"{{endDate}}\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rbs-pos-df-04markdowns-qa-ms.azurewebsites.net/ssa?run=adhoc",
+					"protocol": "https",
+					"host": [
+						"rbs-pos-df-04markdowns-qa-ms",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"ssa"
+					],
+					"query": [
+						{
+							"key": "run",
+							"value": "adhoc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "STO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const cheerio = require('cheerio');\r",
+							"const htmlBody = pm.response.text();\r",
+							"const $ = cheerio.load(htmlBody);\r",
+							"\r",
+							"pm.test(\"Validate status code is 200\", function() \r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Store number\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(\"9997\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate VOIDS\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"VOIDS\"));\r",
+							"});\r",
+							"pm.test(\"Validate VOIDTRANS\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"VOIDTRANS\"));\r",
+							"});\r",
+							"pm.test(\"Validate REFUNDS\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"REFUNDS\"));\r",
+							"});\r",
+							"pm.test(\"Validate TAX REFUND\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"TAXES-REFUNDED\"));\r",
+							"});\r",
+							"pm.test(\"Validate TAX TOTAL\", function() \r",
+							"{ \r",
+							"    pm.expect(htmlBody).to.include(pm.collectionVariables.get(\"TAXES-TOTAL\"));\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"startDate\": \"{{startDate}}\",\r\n\t\"endDate\": \"{{endDate}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rbs-pos-df-04markdowns-qa-ms.azurewebsites.net/sto?run=adhoc",
+					"protocol": "https",
+					"host": [
+						"rbs-pos-df-04markdowns-qa-ms",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"sto"
+					],
+					"query": [
+						{
+							"key": "run",
+							"value": "adhoc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "startDate",
+			"value": "2024-09-19",
+			"type": "string"
+		},
+		{
+			"key": "endDate",
+			"value": "2024-09-25",
+			"type": "string"
+		},
+		{
+			"key": "VOIDS",
+			"value": "-0000010438",
+			"type": "string"
+		},
+		{
+			"key": "VOIDTRANS",
+			"value": "+0000116640",
+			"type": "string"
+		},
+		{
+			"key": "REFUNDS",
+			"value": "-0000025326",
+			"type": "string"
+		},
+		{
+			"key": "TAXES-REFUNDED",
+			"value": "-0000000727",
+			"type": "string"
+		},
+		{
+			"key": "TAXES-TOTAL",
+			"value": "+0000003728",
+			"type": "string"
+		},
+		{
+			"key": "MNF-COUPONS",
+			"value": "+0000001888",
+			"type": "string"
+		},
+		{
+			"key": "STR-COUPONS",
+			"value": "+0000002760",
+			"type": "string"
+		}
+	]
+}
